@@ -18,7 +18,7 @@ with no arguments, resets everything and by default it fetches the RLY price fro
 
 ${priceInUSD} and ${priceInRLY} are variables that can be used to display Creator Coin prices for the bot's nickname.
 
-# if you run your own server, then can customize it a little more... 
+# if you run your own server, you can then...
 
 ```!set_pricebot_avatar <some https:// url to an avatar png, gif, jpg image>```
 
@@ -58,7 +58,7 @@ PM2 is a simple process manager that will restart your node process if it crashe
 
 # RUN everything:
 
-put code in aws instance, scp or rsync, to the server - it's like 2 files
+put code in aws instance or a server somewhere, scp or rsync, to the server - it's like 2 files (price_bot.js and package.json)
 
 Go into the folder where price_bot.js and package.json is at:
 
