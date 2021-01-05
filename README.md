@@ -71,18 +71,6 @@ Contents of .env file should look like this:
 TOKEN=<YOUR_BOT_TOKEN_HERE>
 CUSTOM_BOT=true
 ```
+Then to run your bot: 
 
 ```pm2 start price_bot.js``` 
-
-
-
-
-
-
-# Some external dependencies
-1) Discord bot token (put into .env file) and set CUSTOM_BOT=true
-2) node-persist (to save stuff in local file so we don't need a db)
-
-
-
-
