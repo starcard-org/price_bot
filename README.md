@@ -22,19 +22,19 @@ ${priceInUSD} and ${priceInRLY} are variables that can be used to display Creato
 
 ```!set_pricebot_avatar <some https:// url to an avatar png, gif, jpg image>```
 
-This requires setting CUSTOM_BOT to true in the .env file and own server with instructions below:
+This requires setting CUSTOM_BOT to true in the .env file and running own server with instructions below:
 
 # Basic instructions on running a discord bot in AWS 
 
 Assumes ec2 setup knowledge and can launch and ssh into a ec2 instance / server
 
-Using nano instance since bot use little resources - can be on free tier
+It's possible to use the smallest instance since bot use little resources
 
 # install node
 
 https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html
 
-Quicker use these commands:
+Quicker to use these commands:
 
 ```curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash```
 
@@ -58,13 +58,25 @@ PM2 is a simple process manager that will restart your node process if it crashe
 
 # RUN everything:
 
-put code in aws instance, scp, rsync, to the server - it's like 2 files
+put code in aws instance, scp or rsync, to the server - it's like 2 files
 
 Go into the folder where price_bot.js and package.json is at:
 
 ```yarn install```
 
-```pm2 start price_bot.js```
+Remember... to create a .env file in the folder, put your custom bot TOKEN there
+
+Contents of .env file should look like this:
+```
+TOKEN=<YOUR_BOT_TOKEN_HERE>
+CUSTOM_BOT=true
+```
+
+```pm2 start price_bot.js``` 
+
+
+
+
 
 
 # Some external dependencies
