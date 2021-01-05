@@ -1,3 +1,9 @@
+# install price_bot bot on discord server
+
+https://discord.com/api/oauth2/authorize?client_id=790659705839157289&permissions=0&scope=bot
+
+To install the creatorcoin_pricebot with the purple rly logo as the avatar on your discord server
+
 # bot commands
 
 ```!setcoin <CREATOR_COIN_SYMBOL>```
@@ -12,11 +18,15 @@ with no arguments, resets everything
 
 ${priceInUSD} and ${priceInRLY} are variables that can be used to display Creator Coin prices for the bot's nickname.
 
+# if you run your own server, then can customize it a little more... 
+
 ```!set_pricebot_avatar <some https:// url to an avatar png, gif, jpg image>```
 
-This requires setting CUSTOM_BOT to true in the .env file and someone running their own discord bot with their own bot TOKEN
+This requires setting CUSTOM_BOT to true in the .env file and own server with instructions below:
 
-# Basic instructions on running a discord bot in AWS ec2 setup 
+# Basic instructions on running a discord bot in AWS 
+
+Assumes ec2 setup knowledge and can launch and ssh into a ec2 instance / server
 
 Using nano instance since bot use little resources - can be on free tier
 
@@ -38,17 +48,19 @@ then install yarn (https://tecadmin.net/install-yarn-centos/ using step 2)
 
 ```curl -o- -L https://yarnpkg.com/install.sh | bash```
 
-# install pm2
+# install pm2 
 
 After yarn is installed use yarn to add pm2
 
 ```yarn global add pm2```
 
+PM2 is a simple process manager that will restart your node process if it crashes so your bot stays up
+
 # RUN everything:
 
-put code in aws instance, scp, rsync, to the server
+put code in aws instance, scp, rsync, to the server - it's like 2 files
 
-Go in code folder run:
+Go into the folder where price_bot.js and package.json is at:
 
 ```yarn install```
 
