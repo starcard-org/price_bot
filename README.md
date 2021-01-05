@@ -12,7 +12,7 @@ eg !setcoin PRO
 
 ```!setcoin```
 
-with no arguments, resets everything
+with no arguments, resets everything and by default it fetches the RLY price from uniswap.
 
 ```!set_pricebot_nickname PRO ${priceInUSD} ${priceInRLY}```
 
