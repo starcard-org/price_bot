@@ -19,9 +19,7 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # install pm2
 
-https://computingforgeeks.com/install-pm2-node-js-process-manager-on-rhel-centos-8/
-
-or after yarn is installed use yarn to add pm2
+After yarn is installed use yarn to add pm2
 
 yarn global add pm2
 
