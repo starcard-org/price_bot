@@ -1,4 +1,4 @@
-# install price_bot bot on discord server
+# install price_bot on discord server
 
 https://discord.com/api/oauth2/authorize?client_id=790659705839157289&permissions=0&scope=bot
 
