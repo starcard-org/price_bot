@@ -12,7 +12,7 @@ bot.login(TOKEN);
 
 // can do something fancy when bot joins a server, but... it's not doing anything
 bot.on('guildCreate',(guild) => {
-  console.info(`Joined ${guild.name} and id: ${guild.id}!`);
+  // console.info(`Joined ${guild.name} and id: ${guild.id}!`);
   }
 )
 
@@ -89,31 +89,63 @@ const pollCoinPrices = () => {
       if(coinsymbol && coinsymbol.toLowerCase() !== 'rly'){
         let symbol = new String(coinsymbol).toLowerCase()
         fetch(`https://api.rally.io/v1/creator_coins/${symbol}/price`)
-        .then(res => res.json())
-        .then(json => {
-          let priceInUSD = parseFloat(json.priceInUSD).toFixed(2)
-          let priceInRLY = parseFloat(json.priceInRLY).toFixed(2)
-          if(json.errorMessage) 
-            guild.me.setNickname('Error: ' + json.errorMessage)
-          else {
-            storage.getItem(guild.id + '_bot_nickname').then(nickmessage =>{
-              if(nickmessage){
-                let template = eval('`' + nickmessage + '`')
-                guild.me.setNickname(template)
-              } else {
-                guild.me.setNickname(`${symbol.toUpperCase()}: $${parseFloat(priceInUSD).toFixed(3)} | ${priceInRLY} RLY`);
-              }
+          .then(res => res.json())
+          .then(json => {
+            let priceInUSD = parseFloat(json.priceInUSD).toFixed(2)
+            let priceInRLY = parseFloat(json.priceInRLY).toFixed(2)
+            if(json.errorMessage) 
+              guild.me.setNickname('Error: ' + json.errorMessage)
+            else {
+              storage.getItem(guild.id + '_bot_nickname').then(nickmessage =>{
+                if(nickmessage){
+                  let template = eval('`' + nickmessage + '`')
+                  guild.me.setNickname(template)
+                } else {
+                  guild.me.setNickname(`${symbol.toUpperCase()}: $${parseFloat(priceInUSD).toFixed(3)} | ${priceInRLY} RLY`);
+                }
 
-            })
-           
+              })
+            
+            }
           }
-        });
+        );
       } else {
-        
+        // get $RLY usd price from uniswap via api.thegraph subgraph
         const graphql = JSON.stringify({
-          query: "{\n pair(id: \"0x27fd0857f0ef224097001e87e61026e39e1b04d1\"){\n     token0 {\n       id\n       symbol\n       name\n       derivedETH\n     }\n     token1 {\n       id\n       symbol\n       name\n       derivedETH\n     }\n     reserve0\n     reserve1\n     reserveUSD\n     trackedReserveETH\n     token0Price\n     token1Price\n     volumeUSD\n     txCount\n }\n  \n bundle(id: \"1\" ) {\n   ethPrice\n }\n\n}\n",
+          query:`
+          {
+            pair(id: "0x27fd0857f0ef224097001e87e61026e39e1b04d1"){
+                token0 {
+                  id
+                  symbol
+                  name
+                  derivedETH
+                }
+                token1 {
+                  id
+                  symbol
+                  name
+                  derivedETH
+                }
+                reserve0
+                reserve1
+                reserveUSD
+                trackedReserveETH
+                token0Price
+                token1Price
+                volumeUSD
+                txCount
+            }
+             
+            bundle(id: "1" ) {
+              ethPrice
+            }
+           
+           }
+          `,
           variables: {}
         })
+    
 
         const requestOptions = {
           method: 'POST',
@@ -123,15 +155,15 @@ const pollCoinPrices = () => {
         };
 
         fetch("https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2", requestOptions)
-        .then(response => response.json())
-        .then(result => {
-          let ethPrice = result.data.bundle.ethPrice
-          let rlyUniPrice = parseFloat(result.data.pair.token0Price) * parseFloat(ethPrice)
-          let rlyPrice = parseFloat(rlyUniPrice).toFixed(6)
-          
-          guild.me.setNickname(`RLY: $${rlyPrice}`)
-        })
-        .catch(error => console.log('error', error));
+          .then(response => response.json())
+          .then(result => {
+            let ethPrice = result.data.bundle.ethPrice
+            let rlyUniPrice = parseFloat(result.data.pair.token0Price) * parseFloat(ethPrice)
+            let rlyPrice = parseFloat(rlyUniPrice).toFixed(6)
+            
+            guild.me.setNickname(`RLY: $${rlyPrice}`)
+          })
+          .catch(error => console.log('error', error));
       }
     })
   })
