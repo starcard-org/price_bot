@@ -1,8 +1,8 @@
-# Install price_bot ![alt text](https://images-cc.rally.io/images/rly_token/rly-t-pupple.png) on any discord server
+# Install ![alt text](https://images-cc.rally.io/images/rly_token/rly-t-pupple.png) price_bot on any discord server
+
+Use link below to install the creatorcoin_pricebot with the purple RLY logo on your discord server
 
 https://discord.com/api/oauth2/authorize?client_id=790659705839157289&permissions=0&scope=bot
-
-To install the creatorcoin_pricebot with the purple RLY logo as the avatar on your discord server
 
 The bot doesn't require any permission because it only changes it's own nickname.
 
@@ -20,13 +20,15 @@ with no arguments, resets everything and by default it fetches the RLY price fro
 
 ${priceInUSD} and ${priceInRLY} are variables that can be used to display Creator Coin prices for the bot's nickname.
 
+eg !set_pricebot_nickname My name is Alex, PRO coin in ${priceInUSD}, ${priceInRLY} RLY
+
 # Custom bot - to set avatar
 
 To replace the purple bot RLY Avatar, you need to run your bot/server
 
 ```!set_pricebot_avatar <some https:// url to an avatar png, gif, jpg image>```
 
-This requires setting CUSTOM_BOT to true in the .env file and running own server with instructions below:
+This requires setting CUSTOM_BOT to true in the .env file and running your own server with instructions below:
 
 # Instructions on running a discord bot in AWS 
 
