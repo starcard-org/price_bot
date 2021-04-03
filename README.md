@@ -22,7 +22,9 @@ ${priceInUSD} and ${priceInRLY} are variables that can be used to display Creato
 
 eg !set_pricebot_nickname My name is Alex, PRO coin in ${priceInUSD}, ${priceInRLY} RLY
 
-# Custom bot - to set avatar
+# Custom bot - to set avatar 
+
+SKIP THIS SECTION AND EVERYTHING BELOW - IF NOT RUNNING YOUR OWN SERVER
 
 To replace the purple bot RLY Avatar, you need to run your bot/server
 
